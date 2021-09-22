@@ -1,0 +1,104 @@
+{
+  "switch":{
+    "path": ".unique_entity_id",
+    "type": "int",
+    "function":"switch(contain(urn:li:fsd_profile:)->17)"
+  },
+  "contain":{
+    "path": ".unique_entity_id",
+    "type": "boolean",
+    "function":"contain(urn:li:fsd_profile:)"
+  },
+  "containArrayStr":{
+    "path": ".keyword",
+    "type": "boolean",
+    "function":"contain(ycc)"
+
+  },
+  "containArrayInt":{
+    "path": ".keywordInt",
+    "type": "boolean",
+    "function":"contain(3)"
+
+  },
+  "user_id":{
+    "path": ".unique_entity_id",
+    "type": "string",
+    "function":"replace(, urn:li:fsd_profile:,linkedin#,)"
+
+  },
+  "source": {
+    "type": "short",
+    "default": "17"
+  },
+  "nickname": {
+    "path": "$.name",
+    "default": "unkown",
+    "type": "string"
+  },
+  "profile_image_url": {
+    "path": "$.image_url",
+    "defalut": "",
+    "type": "string"
+  },
+  "about": {
+    "path": "$.about",
+    "defalut": "",
+    "type": "string"
+  },
+  "follower_count": {
+    "path": "$.follower_count",
+    "default": "0",
+    "type": "double"
+  },
+  "bot": {
+    "path": "$.isverity",
+    "default": "false",
+    "type": "boolean"
+  },
+  "a_keywords": {
+    "path": "$.keyword",
+    "default": "",
+    "type": "array"
+  },
+  "created_at": {
+    "path": "$.created_time",
+    "default": "",
+    "format": "yyyy-MM-dd'T'HH:mm:ss",
+    "type": "date"
+  },
+  "volunteer": {
+    "path": "$.volunteer",
+    "default": "",
+    "type": "arrayobject",
+    "interFields": {
+      "title": {
+        "path": "$.title",
+        "default": "",
+        "type": "string"
+      },
+      "company_body_ name": {
+        "path": "$.company_body.name",
+        "default": "",
+        "type": "string"
+      }
+    }
+  },
+  "achievements_publications": {
+    "path": "$.achievements.publications",
+    "default": "",
+    "type": "arrayobject",
+    "interFields": {
+      "title": {
+        "path": "$.id",
+        "default": "",
+        "type": "string"
+      },
+      "name": {
+        "path": "$.name",
+        "default": "",
+        "type": "string"
+      }
+    }
+  }
+}
