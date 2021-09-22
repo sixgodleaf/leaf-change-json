@@ -41,9 +41,4 @@ public class LargerFunction extends Function {
         }
     }
 
-    public static void main(String[] args) {
-        Double d = 2.3;
-        long l = 123L;
-        System.out.println(d > l);
-    }
 }

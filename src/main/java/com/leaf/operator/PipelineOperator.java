@@ -19,7 +19,7 @@ public class PipelineOperator extends Operator {
         int start = expression.indexOf("(");
         int end = expression.lastIndexOf(")");
         String params = expression.substring(start + 1, end).trim();
-        String[] arrays = params.split(",");
+        String[] arrays = params.split("\\|");
         for (int i = 0; i < arrays.length; i++) {
           functions.add(FunctionParser.getFunction(arrays[i], this.path));
         }

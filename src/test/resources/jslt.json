@@ -1,4 +1,9 @@
 {
+  "pipeline":{
+    "path": ".unique_entity_id",
+    "type": "int",
+    "function":"pipeline(replace(new,old)|add(start, end))"
+  },
   "switch":{
     "path": ".unique_entity_id",
     "type": "int",
@@ -19,12 +24,11 @@
     "path": ".keywordInt",
     "type": "boolean",
     "function":"contain(3)"
-
   },
   "user_id":{
     "path": ".unique_entity_id",
     "type": "string",
-    "function":"replace(, urn:li:fsd_profile:,linkedin#,)"
+    "function":"replace(urn:li:fsd_profile:,linkedin#)"
 
   },
   "source": {

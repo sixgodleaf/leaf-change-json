@@ -7,6 +7,8 @@ import com.leaf.function.FunctionParser;
 /**
  * for(contain(ycc))
  * for(large(5, ))
+ * object数组：
+ * 单值数组：
  *
  * @created by ycc
  * @since 2021-09-20

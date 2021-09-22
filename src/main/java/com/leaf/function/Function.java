@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 import com.sun.corba.se.impl.ior.OldJIDLObjectKeyTemplate;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,8 +25,9 @@ import java.util.List;
  * * param：对应不同的函数有不同的参数，具体查看每个函数的配置
 
  */
+@Slf4j
 @Data
-public abstract class Function {
+public abstract class Function implements Cloneable {
     public String path;
 
     public abstract void setExpression(String expression);
@@ -36,7 +38,12 @@ public abstract class Function {
         if (JSONUtil.isJson(expression)) {
             setJSONParams(JSONObject.parseObject(expression));
         } else {
-            setExpression(expression);
+            try {
+                setExpression(expression);
+
+            } catch (Exception e) {
+
+            }
         }
     }
 
@@ -110,4 +117,15 @@ public abstract class Function {
         }
         return (T) results;
     }
+
+    @Override
+    public Function clone() {
+        try {
+            return (Function) super.clone();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
 }

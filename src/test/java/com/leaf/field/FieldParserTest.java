@@ -43,4 +43,10 @@ public class FieldParserTest {
 
         System.out.println(jsonObject.getInteger("a"));
     }
+
+    @Test
+    public void test() {
+        log.error("test");
+        log.error("test");
+    }
 }

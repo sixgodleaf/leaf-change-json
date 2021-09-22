@@ -24,13 +24,13 @@ public class FieldParser {
         Set<String> keySet = jsonObject.keySet();
         for (String keyword : keySet) {
             JSONObject fieldObject = jsonObject.getJSONObject(keyword);
-            Field field = getField(fieldObject);
+            Field field = getField(keyword, fieldObject);
             dataTypeMap.put(keyword, field);
         }
         return dataTypeMap;
     }
 
-    private static Field getField(JSONObject fieldObject) {
+    private static Field getField(String fieldName, JSONObject fieldObject) {
         String type = fieldObject.getString("type");
         Field field = null;
         if (type.equalsIgnoreCase("int")) {
@@ -58,6 +58,8 @@ public class FieldParser {
         } else if (type.equalsIgnoreCase("map")) {
             field = new MapField(fieldObject);
         }
+        field.setFieldName(fieldName);
+        field.setFieldJSONObject(fieldObject);
         return field;
     }
 

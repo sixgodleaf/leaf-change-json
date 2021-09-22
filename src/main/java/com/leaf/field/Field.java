@@ -2,6 +2,7 @@ package com.leaf.field;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.leaf.function.Function;
 import com.leaf.function.FunctionParser;
 import lombok.Data;
@@ -46,10 +47,12 @@ public abstract class Field<T> {
     public TYPE type;
     public T defaultValue;
     public Function function; // 用于处理该字段
+    public JSONObject fieldJSONObject;
     public Map<String, Field> interFields = new HashMap<>();
 
 
     public Field() {
+
 
     }
 
@@ -82,7 +85,9 @@ public abstract class Field<T> {
             }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("对接日志监控，加个函数处理，比如将日志上传到elasticsearch做监控");
+            log.error("fieldname : [{}], function : [{}]",this.getFieldName(), this.getPath(), this.getFieldJSONObject());
+            log.error(e.getMessage(), e);
         }
         return null;
     }
