@@ -1,6 +1,8 @@
 package com.leaf.field;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPath;
 import com.leaf.BaseTest;
 import com.leaf.function.ReplaceFunction;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,11 @@ public class FieldParserTest {
         jslt = BaseTest.getFileStr("/jslt.json");
     }
 
+    @Test
+    public void test1() {
+        JSONArray jsonArray = (JSONArray) JSONPath.read(data, ".achievements.publications.id");
+        System.out.println(jsonArray);
+    }
 
     @Test
     public void parseTest() {

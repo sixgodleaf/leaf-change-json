@@ -12,4 +12,5 @@ public class Test {
     public void test() {
         BigDecimal bigDecimal = new BigDecimal(13);
     }
+
 }
