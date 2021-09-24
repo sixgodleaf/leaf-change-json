@@ -1,0 +1,6 @@
+{
+  "boolean":{
+    "path": ".is_verity",
+    "type": "boolean"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "short":{
+    "path": ".follower_count",
+    "type": "short"
+  }
+}

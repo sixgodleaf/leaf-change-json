@@ -1,0 +1,6 @@
+{
+  "float":{
+    "path": ".follower_count",
+    "type": "float"
+  }
+}

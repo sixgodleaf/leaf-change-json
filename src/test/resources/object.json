@@ -1,0 +1,23 @@
+{
+  "object": {
+    "path": ".task_info",
+    "default": "",
+    "type": "object",
+    "interFields": {
+      "access_token": {
+        "path": ".access_token",
+        "default": "",
+        "type": "string"
+      },
+      "priority": {
+        "path": ".priority",
+        "type": "integer"
+      },
+      "root_this_id": {
+        "path": "^.this_id",
+        "default": "",
+        "type": "string"
+      }
+    }
+}
+}

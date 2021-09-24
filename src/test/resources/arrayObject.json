@@ -1,0 +1,24 @@
+{
+  "arrayobject": {
+    "path": "$.achievements.publications",
+    "default": "",
+    "type": "arrayobject",
+    "interFields": {
+      "title": {
+        "path": "$.id",
+        "default": "",
+        "type": "string"
+      },
+      "name": {
+        "path": "$.name",
+        "default": "",
+        "type": "string"
+      },
+      "root_this_id": {
+        "path": "^.this_id",
+        "default": "",
+        "type": "string"
+      }
+    }
+  }
+}

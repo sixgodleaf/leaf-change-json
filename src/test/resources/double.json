@@ -1,0 +1,6 @@
+{
+  "double":{
+    "path": ".follower_count",
+    "type": "double"
+  }
+}

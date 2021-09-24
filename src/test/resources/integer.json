@@ -1,0 +1,6 @@
+{
+  "integer":{
+    "path": ".follower_count",
+    "type": "integer"
+  }
+}
