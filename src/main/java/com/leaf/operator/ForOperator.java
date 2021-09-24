@@ -1,6 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import com.leaf.function.Function;
 import com.leaf.function.FunctionParser;
 
@@ -14,14 +15,11 @@ import com.leaf.function.FunctionParser;
  * @since 2021-09-20
  */
 public class ForOperator extends Operator {
-    private Function function;
+    private Value value;
 
     @Override
-    public void setExpression(String expression) {
-        int start = expression.indexOf("(");
-        int end = expression.lastIndexOf(")");
-        String param = expression.substring(start + 1, end);
-        function = FunctionParser.getFunction(param, this.path);
+    public void setParam(String param) {
+        value = new Value(param, this.path);
     }
 
     @Override
@@ -39,13 +37,11 @@ public class ForOperator extends Operator {
      */
     @Override
     public <T> T call(JSONObject root, Object object) {
-        T t = function.call(root, object);
-        return t;
+        return (T) value.call(root, object);
     }
 
     @Override
     public <T> T call(JSONObject root, JSONObject object) {
-        T t = function.call(root, object);
-        return t;
+        return (T) value.call(root, object);
     }
 }

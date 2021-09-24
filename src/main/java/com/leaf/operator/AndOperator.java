@@ -1,8 +1,10 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import com.leaf.function.Function;
 import com.leaf.function.FunctionParser;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,14 +21,15 @@ import java.util.List;
 public class AndOperator extends Operator {
 
     private List<Function> functions = new LinkedList<>();
+    private List<Value<Boolean>> values = new LinkedList<>();
 
     @Override
-    public void setExpression(String expression) {
+    public void setParam(String expression) {
         String[] arrays = expression.split(",");
         for (int i = 0; i < arrays.length; i++) {
             String funStr = arrays[i];
-            Function function = FunctionParser.getFunction(funStr, this.path);
-            functions.add(function);
+            Value<Boolean> value = new Value<>(funStr, this.path);
+            values.add(value);
         }
     }
 
@@ -38,8 +41,8 @@ public class AndOperator extends Operator {
     @Override
     public <T> T execute(JSONObject root,JSONObject jsonObject) {
         Boolean b = true;
-        for (int i = 0; i < functions.size(); i++) {
-             b = functions.get(i).execute(root, jsonObject);
+        for (int i = 0; i < values.size(); i++) {
+             b = values.get(i).execute(root, jsonObject);
             if (b == false) {
                 break;
             }

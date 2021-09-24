@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 public class MinFunction extends Function {
 
     @Override
-    public void setExpression(String expression) {
+    public void setParam(String param) {
 
     }
 

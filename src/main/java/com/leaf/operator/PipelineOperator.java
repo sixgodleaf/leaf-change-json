@@ -1,6 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import com.leaf.function.Function;
 import com.leaf.function.FunctionParser;
 
@@ -14,14 +15,12 @@ import java.util.List;
  */
 public class PipelineOperator extends Operator {
   private List<Function> functions = new LinkedList<>();
+  private List<Value> values = new LinkedList<>();
     @Override
-    public void setExpression(String expression) {
-        int start = expression.indexOf("(");
-        int end = expression.lastIndexOf(")");
-        String params = expression.substring(start + 1, end).trim();
-        String[] arrays = params.split("\\|");
+    public void setParam(String param) {
+        String[] arrays = param.split("\\|");
         for (int i = 0; i < arrays.length; i++) {
-          functions.add(FunctionParser.getFunction(arrays[i], this.path));
+          values.add(new Value(arrays[i], this.path));
         }
     }
 
@@ -32,9 +31,9 @@ public class PipelineOperator extends Operator {
 
     @Override
     public <T> T execute(JSONObject root, Object object) {
-        for (int i = 0; i < functions.size(); i++) {
-            Function function = functions.get(i);
-            object = function.execute(root, object);
+        for (int i = 0; i < values.size(); i++) {
+            Value value = values.get(i);
+            object = value.execute(root, object);
         }
         return (T) object;
     }

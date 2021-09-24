@@ -1,6 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import com.leaf.function.Function;
 import com.leaf.function.FunctionParser;
 
@@ -16,18 +17,16 @@ import java.util.Map;
 public class SwitchOperator extends Operator {
 
     private Map<Function, Object> objectMap = new HashMap<>();
+    private Map<Value<Boolean>, Value> valueMap = new HashMap<>();
 
     @Override
-
-    public void setExpression(String expression) {
-        int start = expression.indexOf("(");
-        int end = expression.lastIndexOf(")");
-        String params = expression.substring(start + 1, end).trim();
-        String[] arrays = params.split(",");
+    public void setParam(String param) {
+        String[] arrays = param.split(",");
         for (int i = 0; i < arrays.length; i++) {
             String[] funAndValue = arrays[i].split("->");
-            Function function = FunctionParser.getFunction(funAndValue[0], this.path);
-            objectMap.put(function, funAndValue[1]);
+            Value start = new Value(funAndValue[0], this.path);
+            Value end = new Value(funAndValue[1], this.path);
+            valueMap.put(start, end);
         }
     }
 
@@ -38,10 +37,10 @@ public class SwitchOperator extends Operator {
 
     @Override
     public <T> T execute(JSONObject root, JSONObject jsonObject) {
-        for (Function fu : objectMap.keySet()) {
-            Boolean b = fu.execute(root, jsonObject);
+        for (Value<Boolean> value : valueMap.keySet()) {
+            Boolean b = value.execute(root, jsonObject);
             if (b) {
-                return (T) objectMap.get(fu);
+                return (T) valueMap.get(value).execute(root, jsonObject);
             }
         }
         return null;

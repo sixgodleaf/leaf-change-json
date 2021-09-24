@@ -1,6 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import com.leaf.function.Function;
 import com.leaf.function.FunctionParser;
 
@@ -14,14 +15,15 @@ import java.util.List;
  */
 public class OrOperator extends Operator {
     private List<Function> functions = new LinkedList<>();
+    private List<Value<Boolean>> values = new LinkedList<>();
 
 
     @Override
-    public void setExpression(String expression) {
-        String[] arrays = expression.split("||");
+    public void setParam(String param) {
+        String[] arrays = param.split("||");
         for (int i = 0; i < arrays.length; i++) {
             String funStr = arrays[i];
-            functions.add(FunctionParser.getFunction(funStr, this.path));
+            values.add(new Value<>(funStr, this.path));
         }
     }
 
@@ -33,12 +35,11 @@ public class OrOperator extends Operator {
     @Override
     public <T> T execute(JSONObject root, JSONObject jsonObject) {
         Boolean b = false;
-        for (int i = 0; i < functions.size(); i++) {
-             b = functions.get(i).execute(root, jsonObject);
+        for (int i = 0; i < values.size(); i++) {
+             b = values.get(i).execute(root, jsonObject);
             if (b == true) {
                 return (T) b;
             }
-
         }
         return (T) b;
     }

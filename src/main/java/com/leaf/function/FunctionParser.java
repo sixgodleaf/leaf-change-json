@@ -1,12 +1,10 @@
 package com.leaf.function;
 
 import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.operator.SwitchOperator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -23,17 +21,13 @@ public class FunctionParser {
     public static Map<String, Function> functionMap = new HashMap<>();
 
     static {
-        Set<Class<?>> set = ClassUtil.scanPackage("com.leaf.function");
-        Set<Class<?>> set1 = ClassUtil.scanPackage("com.leaf.operator");
+        addFunction("com.leaf.function");
+        addFunction("com.leaf.operator");
+    }
+
+    public static void addFunction(String path) {
+        Set<Class<?>> set = ClassUtil.scanPackage(path);
         for (Class<?> c : set) {
-            try {
-               Function f= (Function) ReflectUtil.newInstance(c);
-                functionMap.put(c.getSimpleName().replaceAll("Function|Operator", "").toLowerCase(), f);
-            } catch (Exception e) {
-                log.error(c.getSimpleName());
-            }
-        }
-        for (Class<?> c : set1) {
             try {
                 Function f= (Function) ReflectUtil.newInstance(c);
                 functionMap.put(c.getSimpleName().replaceAll("Function|Operator", "").toLowerCase(), f);
@@ -48,31 +42,6 @@ public class FunctionParser {
      *
      * @return
      */
-
-//    public static Function getFunction(String funStr, String path) {
-//        if (StrUtil.isEmpty(funStr)) {
-//            return null;
-//        }
-//        String name;
-//        if (JSONUtil.isJson(funStr)) {
-//            JSONObject jsonObject = JSONObject.parseObject(funStr);
-//            name = jsonObject.getString("name");
-//        } else {
-//            int start = funStr.indexOf("(");
-//            name = funStr.substring(0, start);
-//        }
-//        Function function = null;
-//        if (name.equalsIgnoreCase("replace")) {
-//            function = new ReplaceFunction();
-//        } else if (name.equalsIgnoreCase("switch")) {
-//            function = new SwitchOperator();
-//        } else if (name.equalsIgnoreCase("contain")) {
-//            function = new ContainFunction();
-//        }
-//        function.setPath(path);
-//        function.setParams(funStr);
-//        return function;
-//    }
 
     public static Function getFunction(String funStr, String path) {
         if (StrUtil.isEmpty(funStr)) {
@@ -99,34 +68,8 @@ public class FunctionParser {
         return function;
     }
 
-
-//    public static Function getFunction(JSONObject jsonObject) {
-//        if (jsonObject == null) {
-//            return null;
-//        }
-//        String type = jsonObject.getString("name");
-//        if (type.equalsIgnoreCase("ReplaceFunction")) {
-//            return new ReplaceFunction(jsonObject);
-//        } else if (type.equalsIgnoreCase("DefaultIdFunction")) {
-//            return null;
-//        }
-//        return null;
-//    }
-//    public static Function getFunction(String functionName, String param) {
-//
-//        if (functionName.equalsIgnoreCase("ReplaceFunction")) {
-//            return new ReplaceFunction(param);
-//        } else if (functionName.equalsIgnoreCase("DefaultIdFunction")) {
-//            return null;
-//        }
-//        return null;
-//    }
-
-
-    public static void main(String[] args) {
-        Set<Class<?>> set = ClassUtil.scanPackage("com.leaf.function");
-        for (Class<?> c : set) {
-            System.out.println(c.getName());
-        }
+    public static void addFunction(String name, Function function) {
+        functionMap.put(name, function);
     }
+
 }

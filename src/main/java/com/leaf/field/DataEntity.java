@@ -60,6 +60,8 @@ public class DataEntity {
         return new JSONObject(results);
     }
 
+
+
     public static void main(String[] args) {
 
         DataEntity dataEntity = new DataEntity();
@@ -67,9 +69,26 @@ public class DataEntity {
 
     }
 
-    public void putField(String keyword, Field field) {
-        fieldMap.put(keyword, field);
+    /**
+     * 增加一种配置的类型，支持配置中使用
+     * @param keyword
+     * @param field
+     */
+    public void configField(String keyword, Field field) {
+        FieldParser.addField(keyword, field);
     }
 
+    /**
+     * 增加一种配置的函数，支持配置中使用
+     * @param keyword
+     * @param field
+     */
+    public void configFunction(String keyword, Field field) {
+        FieldParser.addField(keyword, field);
+    }
+
+    public void addField(String keyword, Field field) {
+
+    }
 
 }

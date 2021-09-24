@@ -1,6 +1,7 @@
 package com.leaf.function;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import lombok.Data;
 
 /**
@@ -11,32 +12,31 @@ import lombok.Data;
  */
 @Data
 public class addFunction extends Function {
-    private String startStr = "";
-    private String endStr = "";
+    private Value<String> startValue;
+    private Value<String> endValue;
 
     @Override
-    public void setExpression(String expression) {
-        int start = expression.indexOf("(");
-        int end = expression.lastIndexOf(")");
-        String params = expression.substring(start + 1, end).trim();
-        String[] arrays = params.split(",");
-        startStr = arrays[0].trim();
-        endStr = arrays.length >= 2 ? arrays[1].trim() : "";
+    public void setParam(String param) {
+        String[] arrays = param.split(",");
+        String startStr = arrays[0].trim();
+        startValue = new Value(startStr, this.path);
+        String endStr = arrays.length >= 2 ? arrays[1].trim() : "";
+        endValue = new Value(endStr, this.path);
     }
 
     @Override
     public void setJSONParams(JSONObject jsonObject) {
         if (jsonObject != null) {
             path = jsonObject.containsKey("path") ? jsonObject.getString("path") : "";
-            startStr = jsonObject.containsKey("start") ? jsonObject.getString("start") : "";
-            endStr = jsonObject.containsKey("end") ? jsonObject.getString("end") : "";
+            //String startStr = jsonObject.containsKey("start") ? jsonObject.getString("start") : "";
+//            String endStr = jsonObject.containsKey("end") ? jsonObject.getString("end") : "";
         }
     }
 
 
     @Override
     public <T> T call(JSONObject root, Object object) {
-        String result = (startStr + object.toString() + endStr);
+        String result = (startValue.execute(root, root) + object.toString() + endValue.execute(root, root));
         return (T) result;
     }
 

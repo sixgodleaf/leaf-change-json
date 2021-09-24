@@ -36,6 +36,14 @@ public class ObjectField extends Field<Map<String, Object>> {
     }
 
     @Override
+    public void setFieldJSONObject(JSONObject fieldObject) {
+        super.setFieldJSONObject(fieldObject);
+        Map<String, Field> interDataTypeMap = FieldParser.parse(fieldObject.getJSONObject("interFields"));
+        this.setInterFields(interDataTypeMap);
+    }
+
+
+    @Override
     protected Map<String, Object> getDefault() {
         return null;
     }

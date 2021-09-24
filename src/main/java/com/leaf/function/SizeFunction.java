@@ -10,7 +10,7 @@ public class SizeFunction extends Function {
 
 
     @Override
-    public void setExpression(String expression) {
+    public void setParam(String param) {
 
     }
 

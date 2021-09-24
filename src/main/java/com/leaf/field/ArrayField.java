@@ -9,9 +9,12 @@ import java.util.List;
  * 日期处理方式
  * @author ycc
  */
-public class ArrayField extends Field<List> {
+public class ArrayField extends Field<List<Object>> {
     protected TYPE type = TYPE.ARRAY;
 
+    public ArrayField() {
+
+    }
     public ArrayField(JSONObject fieldObject) {
         super(fieldObject);
     }

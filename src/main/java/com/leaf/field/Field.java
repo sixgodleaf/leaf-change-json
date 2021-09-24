@@ -40,7 +40,7 @@ import java.util.Map;
  */
 @Slf4j
 @Data
-public abstract class Field<T> {
+public abstract class Field<T> implements Cloneable{
     public String path;
     public String rootPath;
     public String fieldName;
@@ -57,6 +57,14 @@ public abstract class Field<T> {
     }
 
     public Field(JSONObject fieldObject) {
+        this.path = fieldObject.getString("path");
+        String defaultValue = fieldObject.getString("default");
+        this.setDefault(defaultValue);
+        String functionObject = fieldObject.getString("function");
+        this.function = FunctionParser.getFunction(functionObject, path);
+    }
+
+    public void setFieldJSONObject(JSONObject fieldObject) {
         this.path = fieldObject.getString("path");
         String defaultValue = fieldObject.getString("default");
         this.setDefault(defaultValue);
@@ -108,6 +116,17 @@ public abstract class Field<T> {
         return this;
     }
 
+
+
+    @Override
+    public Field clone() {
+        try {
+            return (Field) super.clone();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return null;
+    }
     /**
      * 对改字段的处理方式
      *

@@ -1,6 +1,7 @@
 package com.leaf.function;
 
 import com.alibaba.fastjson.JSONObject;
+import com.leaf.Value;
 import lombok.Data;
 
 /**
@@ -13,15 +14,16 @@ import lombok.Data;
 public class ReplaceFunction extends Function {
     private String oldStr;
     private String newStr;
+    private Value<String> oldValue;
+    private Value<String> newValue;
 
     @Override
-    public void setExpression(String expression) {
-        int start = expression.indexOf("(");
-        int end = expression.lastIndexOf(")");
-        String params = expression.substring(start + 1, end).trim();
-        String[] arrays = params.split(",");
+    public void setParam(String param) {
+        String[] arrays = param.split(",");
         newStr = arrays[0].trim();
+        newValue = new Value(newStr, this.path);
         oldStr = arrays.length >= 2 ? arrays[1].trim() : "";
+        oldValue = new Value(oldStr, this.path);
     }
 
     @Override
@@ -36,7 +38,7 @@ public class ReplaceFunction extends Function {
 
     @Override
     public <T> T call(JSONObject root, Object object) {
-        String result = object.toString().replaceAll(oldStr, newStr);
+        String result = object.toString().replaceAll(oldValue.execute(root, root), newValue.execute(root, root));
         return (T) result;
     }
 

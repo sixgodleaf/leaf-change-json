@@ -1,12 +1,12 @@
 {
   "pipeline":{
     "path": ".unique_entity_id",
-    "type": "int",
+    "type": "integer",
     "function":"pipeline(replace(new,old)|add(start, end))"
   },
   "switch":{
     "path": ".unique_entity_id",
-    "type": "int",
+    "type": "integer",
     "function":"switch(contain(urn:li:fsd_profile:)->17)"
   },
   "contain":{

@@ -5,7 +5,6 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
-import com.sun.corba.se.impl.ior.OldJIDLObjectKeyTemplate;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +29,13 @@ import java.util.List;
 public abstract class Function implements Cloneable {
     public String path;
 
-    public abstract void setExpression(String expression);
+    public void setExpression(String expression) {
+        int start = expression.indexOf("(");
+        int end = expression.lastIndexOf(")");
+        String params = expression.substring(start + 1, end).trim();
+        setParam(params);
+    }
+    public abstract void setParam(String param);
 
     public abstract void setJSONParams(JSONObject jsonObject);
 

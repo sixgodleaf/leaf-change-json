@@ -3,6 +3,7 @@ package com.leaf.field;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+import com.leaf.function.FunctionParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,14 @@ public class ArrayObjectField extends Field<List<Map<String, Object>>> {
     }
     public ArrayObjectField(JSONObject fieldObject) {
         super(fieldObject);
+        Map<String, Field> interDataTypeMap = FieldParser.parse(fieldObject.getJSONObject("interFields"));
+        this.setInterFields(interDataTypeMap);
+    }
+
+
+    @Override
+    public void setFieldJSONObject(JSONObject fieldObject) {
+        super.setFieldJSONObject(fieldObject);
         Map<String, Field> interDataTypeMap = FieldParser.parse(fieldObject.getJSONObject("interFields"));
         this.setInterFields(interDataTypeMap);
     }
