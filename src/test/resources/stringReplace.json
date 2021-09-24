@@ -1,0 +1,7 @@
+{
+  "string":{
+    "path": ".this_id",
+    "type": "string",
+    "function":"replace(fb#RHINO#, urn:li:member:)"
+  }
+}

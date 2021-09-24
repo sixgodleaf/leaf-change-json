@@ -1,0 +1,17 @@
+{
+  "add":{
+    "path": ".this_id",
+    "type": "string",
+    "function":"add(fb#RHINO#, urn:li:member:)"
+  },
+  "addTail":{
+    "path": ".this_id",
+    "type": "string",
+    "function":"add(, _urn:li:member:)"
+  },
+  "addHead":{
+    "path": ".this_id",
+    "type": "string",
+    "function":"add(fb#RHINO#, )"
+  }
+}
