@@ -3,18 +3,16 @@ package com.leaf.operator;
 import com.alibaba.fastjson.JSONObject;
 import com.leaf.Value;
 import com.leaf.function.Function;
-import com.leaf.function.FunctionParser;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * or()
+ * and(contain(fb#RHINO#),contain(link))
  * @created by ycc
  * @since 2021-09-20
  */
 public class OrOperator extends Operator {
-    private List<Function> functions = new LinkedList<>();
     private List<Value> values = new LinkedList<>();
 
 

@@ -6,10 +6,8 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

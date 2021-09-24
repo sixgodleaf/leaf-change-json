@@ -14,7 +14,6 @@ import java.util.List;
  * @since 2021-09-20
  */
 public class PipelineOperator extends Operator {
-  private List<Function> functions = new LinkedList<>();
   private List<Value> values = new LinkedList<>();
     @Override
     public void setParam(String param) {

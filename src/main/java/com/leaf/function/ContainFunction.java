@@ -12,7 +12,6 @@ import com.leaf.Value;
  * @since 2021-09-20
  */
 public class ContainFunction extends Function {
-//    private String value;
     private Value value;
 
     @Override

@@ -14,7 +14,6 @@ import java.util.Map;
  * @since 2021-09-20
  */
 public class SwitchOperator extends Operator {
-
     private Map<Value, Value> valueMap = new HashMap<>();
 
     @Override
