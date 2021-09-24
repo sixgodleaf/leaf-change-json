@@ -15,15 +15,15 @@ import java.util.List;
  */
 public class OrOperator extends Operator {
     private List<Function> functions = new LinkedList<>();
-    private List<Value<Boolean>> values = new LinkedList<>();
+    private List<Value> values = new LinkedList<>();
 
 
     @Override
     public void setParam(String param) {
-        String[] arrays = param.split("||");
+        String[] arrays = param.split(",");
         for (int i = 0; i < arrays.length; i++) {
             String funStr = arrays[i];
-            values.add(new Value<>(funStr, this.path));
+            values.add(new Value(funStr, this.path));
         }
     }
 

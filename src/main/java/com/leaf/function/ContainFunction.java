@@ -13,12 +13,11 @@ import com.leaf.Value;
  */
 public class ContainFunction extends Function {
 //    private String value;
-    private Value<String> value;
+    private Value value;
 
     @Override
     public void setParam(String param) {
-        this.value = new Value<>(param, this.path);
-
+        this.value = new Value(param, this.path);
     }
 
     @Override

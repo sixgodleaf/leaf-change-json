@@ -12,8 +12,8 @@ import lombok.Data;
  */
 @Data
 public class AddFunction extends Function {
-    private Value<String> startValue;
-    private Value<String> endValue;
+    private Value startValue;
+    private Value endValue;
 
     @Override
     public void setParam(String param) {

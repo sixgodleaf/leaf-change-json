@@ -55,6 +55,11 @@ public class FieldParserTest {
 
     @Test
     public void integerTest() {
+        test("/stringOr.json");
+        test("/switch.json");
+        test("/stringAnd.json");
+        test("/stringFor.json");
+        test("/pipeline.json");
         test("/integer.json");
         test("/string.json");
         test("/boolean.json");
@@ -67,5 +72,7 @@ public class FieldParserTest {
         test("/arrayObject.json");
         test("/stringReplace.json");
         test("/stringAdd.json");
+        test("/contain.json");
+        test("/larger.json");
     }
 }

@@ -22,32 +22,32 @@ import java.util.List;
  * @created by ycc
  * @since 2021-09-23
  */
-public class Value<T> extends Function {
+public class Value extends Function {
     private String rootPath;
     private String newPath;
-    private T value;
+    private Object value;
     private Function function;
 
     public Value(String param, String rootPath) {
-        if (param.contains("(")) {
+        if (param != null && param.contains("(")) {
             int start = param.indexOf("(");
             String functionName = param.substring(0, start);
             if (FunctionParser.functionMap.containsKey(functionName)) {
                 function = FunctionParser.getFunction(param, rootPath);
             } else {
-                value = (T) param;
+                value = param;
             }
         } else {
-            value = (T) param;
+            value = param;
         }
     }
 
     @Override
-    public T execute(JSONObject root, JSONObject current) {
+    public <T> T execute(JSONObject root, JSONObject current) {
         if (function != null) {
             return function.execute(root, current);
         } else if (value != null) {
-            return value;
+            return (T) value;
         } else if (StrUtil.isNotEmpty(newPath)) {
             return (T) JSONPath.read(current.toJSONString(), newPath);
         } else {
@@ -66,12 +66,12 @@ public class Value<T> extends Function {
     }
 
     @Override
-    public T call(JSONObject root, Object object) {
+    public <T> T call(JSONObject root, Object object) {
         return function.call(root, object);
     }
 
     @Override
-    public T call(JSONObject root, JSONObject object) {
+    public <T> T call(JSONObject root, JSONObject object) {
         return function.call(root, object);
     }
 }

@@ -2,7 +2,6 @@ package com.leaf.field;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
-import com.leaf.function.FunctionParser;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
@@ -15,20 +14,30 @@ import java.util.TimeZone;
  * @author ycc
  */
 @Slf4j
-public class DateField extends Field<Date> {
+public class DateField extends Field<Long> {
     protected TYPE type = TYPE.DATE;
-    private String format;
-    public ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal;
+    private String startFormat;
+    private String endFormat;
+    public ThreadLocal<SimpleDateFormat> startDateFormatThreadLocal;
+    public ThreadLocal<SimpleDateFormat> endDateFormatThreadLocal;
 
     public DateField() {
 
     }
 
+    @Override
     public void setFieldJSONObject(JSONObject fieldObject) {
         super.setFieldJSONObject(fieldObject);
-        this.format = fieldObject.getString("format");
-        simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> {
-            SimpleDateFormat ret = new SimpleDateFormat(format);
+        this.startFormat = fieldObject.getString("from_format");
+        this.endFormat = fieldObject.getString("to_formart");
+        startDateFormatThreadLocal = ThreadLocal.withInitial(() -> {
+            SimpleDateFormat ret = new SimpleDateFormat(startFormat);
+            ret.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return ret;
+        });
+
+        endDateFormatThreadLocal = ThreadLocal.withInitial(() -> {
+            SimpleDateFormat ret = new SimpleDateFormat(startFormat);
             ret.setTimeZone(TimeZone.getTimeZone("UTC"));
             return ret;
         });
@@ -40,15 +49,16 @@ public class DateField extends Field<Date> {
 
 
     @Override
-    public Date getValue(String value) {
-        return null;
+    public Long getValue(String value) {
+        return Long.valueOf(value);
     }
 
     @Override
-    public Date getValue(JSONObject value, String path) {
+    public Long getValue(JSONObject value, String path) {
         String dateStr = (String) JSONPath.read(value.toJSONString(), path);
         try {
-            return simpleDateFormatThreadLocal.get().parse(dateStr);
+            Date date = startDateFormatThreadLocal.get().parse(dateStr);
+            return date.getTime();
         } catch (ParseException e) {
             return getValue(dateStr);
         }
@@ -60,7 +70,7 @@ public class DateField extends Field<Date> {
 //    }
 
     @Override
-    protected Date getDefault() {
+    protected Long getDefault() {
         return null;
     }
 

@@ -2,6 +2,7 @@ package com.leaf.field;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -15,11 +16,9 @@ public class ArrayField extends Field<List<Object>> {
 
     }
 
-
-
     @Override
     public List getValue(String value) {
-        return null;
+        return new Gson().fromJson(value, List.class);
     }
 
     @Override

@@ -10,25 +10,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * {
- *     "name": "and",
- *     "function":for(or(and(isnumber(.b)&&isdouble(.d))))
- * }
+
  * and(contain(fb#RHINO#),contain(link))
  * @created by ycc
  * @since 2021-09-20
  */
 public class AndOperator extends Operator {
 
-    private List<Function> functions = new LinkedList<>();
-    private List<Value<Boolean>> values = new LinkedList<>();
+    private List<Value> values = new LinkedList<>();
 
     @Override
     public void setParam(String expression) {
         String[] arrays = expression.split(",");
         for (int i = 0; i < arrays.length; i++) {
             String funStr = arrays[i];
-            Value<Boolean> value = new Value<>(funStr, this.path);
+            Value value = new Value(funStr, this.path);
             values.add(value);
         }
     }

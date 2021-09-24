@@ -14,8 +14,8 @@ import lombok.Data;
 public class ReplaceFunction extends Function {
     private String oldStr;
     private String newStr;
-    private Value<String> oldValue;
-    private Value<String> newValue;
+    private Value oldValue;
+    private Value newValue;
 
     @Override
     public void setParam(String param) {
@@ -34,7 +34,6 @@ public class ReplaceFunction extends Function {
             oldStr = jsonObject.containsKey("old") ? jsonObject.getString("old") : "";
         }
     }
-
 
     @Override
     public <T> T call(JSONObject root, Object object) {

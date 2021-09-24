@@ -3,6 +3,7 @@ package com.leaf.field;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.leaf.function.Function;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +48,9 @@ public class FieldParser {
         for (String keyword : keySet) {
             try {
                 JSONObject fieldObject = jsonObject.getJSONObject(keyword);
-                Field field = fieldMap.get(fieldObject.getString("type")).clone();
+                Field f = fieldMap.get(fieldObject.getString("type")).clone();
+                Gson gson = new Gson();
+                Field field = gson.fromJson(gson.toJson(f), fieldMap.get(fieldObject.getString("type")).getClass());
                 field.setFieldName(keyword);
                 field.setFieldJSONObject(fieldObject);
                 dataTypeMap.put(keyword, field);

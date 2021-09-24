@@ -1,25 +1,18 @@
-package com.leaf.operator;
+package com.leaf.function;
 
 import com.alibaba.fastjson.JSONObject;
 import com.leaf.Value;
-import com.leaf.function.Function;
-import com.leaf.function.FunctionParser;
 
 /**
- * for(contain(ycc))
- * for(larger(5, ))
- * object数组：
- * 单值数组：
- *
  * @created by ycc
- * @since 2021-09-20
+ * @since 2021-09-23
  */
-public class ForOperator extends Operator {
+public class FilterFunction extends Function {
     private Value value;
 
     @Override
-    public void setParam(String param) {
-        value = new Value(param, this.path);
+    public void setParam(String expression) {
+        value = new Value(expression, path);
     }
 
     @Override
@@ -27,14 +20,6 @@ public class ForOperator extends Operator {
 
     }
 
-    /**
-     * 处理单个值数据
-     *
-     * @param root
-     * @param object
-     * @param <T>
-     * @return
-     */
     @Override
     public <T> T call(JSONObject root, Object object) {
         return (T) value.call(root, object);

@@ -5,8 +5,11 @@ import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -55,7 +58,9 @@ public class FunctionParser {
             int start = funStr.indexOf("(");
             name = funStr.substring(0, start);
         }
-        Function function = functionMap.get(name).clone();
+        Function funstr = functionMap.get(name).clone();
+        Gson gson = new Gson();
+        Function function = gson.fromJson(gson.toJson(funstr), functionMap.get(name).getClass());
         try {
             function.setPath(path);
             function.setParams(funStr);

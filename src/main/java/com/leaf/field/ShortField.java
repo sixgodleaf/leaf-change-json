@@ -9,7 +9,6 @@ import com.alibaba.fastjson.JSONPath;
  */
 public class ShortField extends Field<Short> {
     protected TYPE type = TYPE.FLOAT;
-    protected Short defaultValue;
 
     public ShortField() {
 
