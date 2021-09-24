@@ -1,6 +1,8 @@
 package com.leaf.field;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPath;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +16,6 @@ public class ObjectField extends Field<Map<String, Object>> {
     public ObjectField() {
 
     }
-    public ObjectField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
-
 
     @Override
     public Map<String, Object> getValue(String value) {
@@ -25,10 +23,10 @@ public class ObjectField extends Field<Map<String, Object>> {
     }
 
     @Override
-    public Map<String, Object> getValue(JSONObject value) {
+    public Map<String, Object> getValue(JSONObject value, String path) {
         Map<String, Field> fieldMap = getInterFields();
         Map<String, Object> results = new HashMap<>();
-        JSONObject jsonObject = value.getJSONObject(path);
+        JSONObject jsonObject = (JSONObject) JSONPath.read(value.toJSONString(), path);
         for (String key : fieldMap.keySet()) {
             results.put(key, fieldMap.get(key).fieldExecute(value, jsonObject));
         }

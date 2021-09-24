@@ -9,20 +9,17 @@ import com.alibaba.fastjson.JSONPath;
 public class StringField extends Field<String> {
     protected TYPE type = TYPE.STRING;
 
-    public StringField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
-
     public StringField() {
 
     }
+
     @Override
     public String getValue(String value) {
         return null;
     }
 
     @Override
-    public String getValue(JSONObject value) {
+    public String getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (String) o;

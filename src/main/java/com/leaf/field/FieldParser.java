@@ -53,6 +53,7 @@ public class FieldParser {
                 dataTypeMap.put(keyword, field);
             } catch (Exception e) {
                 log.error(keyword);
+                log.error(e.getMessage(), e);
             }
 
         }

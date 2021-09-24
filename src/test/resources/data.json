@@ -1,5 +1,5 @@
 {
-  "follower_count": "12",
+  "follower_count": 12,
   "keyword": ["ycc", "handsome"],
   "keywordInt": [3, 5, 7],
   "achievements": {
@@ -161,7 +161,7 @@
     "time_period": null,
     "image_url": ""
   }],
-  "isverity": true,
+  "is_verity": true,
   "id": "ACoAADVYi6sB1UjQhrLiy-GHve-OMNoC82RmKhk",
   "this_id": "urn:li:member:894995371",
   "headline": "messi club - 首席执行官",

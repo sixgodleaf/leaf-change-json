@@ -62,7 +62,7 @@ public abstract class Function implements Cloneable {
     public <T> T execute(JSONObject root, JSONObject value) {
         Object o;
         if (path.startsWith("^")) {
-            o = JSONPath.read(root.toJSONString(), path);
+            o = JSONPath.read(root.toJSONString(), path.substring(1, path.length()));
         } else {
             o = JSONPath.read(value.toJSONString(), path);
         }

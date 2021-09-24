@@ -1,5 +1,6 @@
 package com.leaf.field;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 
@@ -13,10 +14,6 @@ public class DoubleField extends Field<Double> {
 
     }
 
-    public DoubleField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
-
 
     @Override
     public Double getValue(String value) {
@@ -24,7 +21,7 @@ public class DoubleField extends Field<Double> {
     }
 
     @Override
-    public Double getValue(JSONObject value) {
+    public Double getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (Double) o;
@@ -41,6 +38,6 @@ public class DoubleField extends Field<Double> {
 
     @Override
     protected void setDefault(String defaultValue) {
-        this.defaultValue = Double.valueOf(defaultValue);
+        this.defaultValue = StrUtil.isEmpty(defaultValue) ? 0.0 : Double.valueOf(defaultValue);
     }
 }

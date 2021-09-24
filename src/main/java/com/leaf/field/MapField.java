@@ -20,10 +20,7 @@ public class MapField extends Field<Map<String,Object>> {
     public MapField() {
 
     }
-    public MapField(JSONObject fieldObject) {
-        super(fieldObject);
-        keyList = (List<String>) fieldObject.get("field");
-    }
+
 
     @Override
     public Map<String, Object> getValue(String value) {
@@ -31,7 +28,7 @@ public class MapField extends Field<Map<String,Object>> {
     }
 
     @Override
-    public Map<String, Object> getValue(JSONObject value) {
+    public Map<String, Object> getValue(JSONObject value, String path) {
 
         return null;
     }

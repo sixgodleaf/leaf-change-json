@@ -44,16 +44,26 @@ public class FieldParserTest {
         System.out.println(jsonObject);
     }
 
-    @Test
-    public void containTest() {
-        JSONObject jsonObject = JSONObject.parseObject("{\"a\":\"3\"}");
-
-        System.out.println(jsonObject.getInteger("a"));
+    public void test(String path) {
+        jslt = BaseTest.getFileStr(path);
+        DataEntity dataEntity = new DataEntity();
+        dataEntity.setJslt(jslt);
+        dataEntity.setJSONString(data);
+        JSONObject jsonObject = dataEntity.changeJSONObject();
+        System.out.println(jsonObject);
     }
 
     @Test
-    public void test() {
-        log.error("test");
-        log.error("test");
+    public void integerTest() {
+        test("/integer.json");
+        test("/string.json");
+        test("/boolean.json");
+        test("/double.json");
+        test("/long.json");
+        test("/float.json");
+        test("/short.json");
+        test("/array.json");
+        test("/object.json");
+        test("/arrayObject.json");
     }
 }

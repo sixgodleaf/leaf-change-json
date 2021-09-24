@@ -1,5 +1,6 @@
 package com.leaf.field;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 
@@ -13,9 +14,6 @@ public class ShortField extends Field<Short> {
     public ShortField() {
 
     }
-    public ShortField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
 
     @Override
     public Short getValue(String value) {
@@ -23,7 +21,7 @@ public class ShortField extends Field<Short> {
     }
 
     @Override
-    public Short getValue(JSONObject value) {
+    public Short getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (Short) o;
@@ -39,7 +37,7 @@ public class ShortField extends Field<Short> {
 
     @Override
     protected void setDefault(String defaultValue) {
-        this.defaultValue = Short.valueOf(defaultValue);
+        this.defaultValue = StrUtil.isEmpty(defaultValue) ? 0 : Short.valueOf(defaultValue);
     }
 
 

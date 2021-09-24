@@ -1,5 +1,6 @@
 package com.leaf.field;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 
@@ -12,16 +13,13 @@ public class FloatField extends Field<Float> {
     public FloatField() {
 
     }
-    public FloatField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
 
     @Override
     public Float getValue(String value) {
         return Float.valueOf(value);
     }
     @Override
-    public Float getValue(JSONObject value) {
+    public Float getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (Float) o;
@@ -37,6 +35,6 @@ public class FloatField extends Field<Float> {
 
     @Override
     protected void setDefault(String defaultValue) {
-        this.defaultValue = Float.valueOf(defaultValue);
+        this.defaultValue = StrUtil.isEmpty(defaultValue) ? 0F : Float.valueOf(defaultValue);
     }
 }

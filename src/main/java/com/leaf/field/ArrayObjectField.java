@@ -20,11 +20,7 @@ public class ArrayObjectField extends Field<List<Map<String, Object>>> {
     public ArrayObjectField() {
 
     }
-    public ArrayObjectField(JSONObject fieldObject) {
-        super(fieldObject);
-        Map<String, Field> interDataTypeMap = FieldParser.parse(fieldObject.getJSONObject("interFields"));
-        this.setInterFields(interDataTypeMap);
-    }
+
 
 
     @Override
@@ -41,7 +37,7 @@ public class ArrayObjectField extends Field<List<Map<String, Object>>> {
     }
 
     @Override
-    public List<Map<String, Object>> getValue(JSONObject value) {
+    public List<Map<String, Object>> getValue(JSONObject value, String path) {
         List<Map<String, Object>> results = new ArrayList<>();
         Map<String, Field> fieldMap = getInterFields();
         JSONArray jsonArray = (JSONArray) JSONPath.read(value.toJSONString(), path);

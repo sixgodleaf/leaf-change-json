@@ -88,7 +88,7 @@
       }
     }
   },
-  "achievements_publications": {
+  "arrayobject": {
     "path": "$.achievements.publications",
     "default": "",
     "type": "arrayobject",

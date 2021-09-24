@@ -27,6 +27,7 @@ public class DataEntity {
     public void setJslt(String jslt) {
         fieldMap = FieldParser.parse(JSONObject.parseObject(jslt));
     }
+
     /**
      * 生成Map
      * @return

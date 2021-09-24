@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONPath;
 import java.util.List;
 
 /**
- * 日期处理方式
  * @author ycc
  */
 public class ArrayField extends Field<List<Object>> {
@@ -14,9 +13,6 @@ public class ArrayField extends Field<List<Object>> {
 
     public ArrayField() {
 
-    }
-    public ArrayField(JSONObject fieldObject) {
-        super(fieldObject);
     }
 
 
@@ -27,7 +23,7 @@ public class ArrayField extends Field<List<Object>> {
     }
 
     @Override
-    public List getValue(JSONObject value) {
+    public List getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (List) o;

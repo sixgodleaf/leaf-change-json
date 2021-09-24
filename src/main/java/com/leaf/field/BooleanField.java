@@ -18,9 +18,6 @@ public class BooleanField extends Field<Boolean> {
     public BooleanField() {
 
     }
-    public BooleanField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
 
 
     @Override
@@ -29,7 +26,7 @@ public class BooleanField extends Field<Boolean> {
     }
 
     @Override
-    public Boolean getValue(JSONObject value) {
+    public Boolean getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (Boolean) o;

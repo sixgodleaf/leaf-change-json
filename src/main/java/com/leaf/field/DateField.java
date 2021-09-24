@@ -2,6 +2,7 @@ package com.leaf.field;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+import com.leaf.function.FunctionParser;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
@@ -22,14 +23,19 @@ public class DateField extends Field<Date> {
     public DateField() {
 
     }
-    public DateField(JSONObject fieldObject) {
-        super(fieldObject);
+
+    public void setFieldJSONObject(JSONObject fieldObject) {
+        super.setFieldJSONObject(fieldObject);
         this.format = fieldObject.getString("format");
         simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> {
             SimpleDateFormat ret = new SimpleDateFormat(format);
             ret.setTimeZone(TimeZone.getTimeZone("UTC"));
             return ret;
         });
+    }
+
+    public void setParam() {
+
     }
 
 
@@ -39,7 +45,7 @@ public class DateField extends Field<Date> {
     }
 
     @Override
-    public Date getValue(JSONObject value) {
+    public Date getValue(JSONObject value, String path) {
         String dateStr = (String) JSONPath.read(value.toJSONString(), path);
         try {
             return simpleDateFormatThreadLocal.get().parse(dateStr);

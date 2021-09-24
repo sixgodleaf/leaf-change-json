@@ -13,9 +13,6 @@ public class IntegerField extends Field<Integer> {
 
     }
 
-    public IntegerField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
 
 
     @Override
@@ -24,7 +21,7 @@ public class IntegerField extends Field<Integer> {
     }
 
     @Override
-    public Integer getValue(JSONObject value) {
+    public Integer getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (Integer) o;

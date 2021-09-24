@@ -1,5 +1,6 @@
 package com.leaf.field;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 import lombok.Data;
@@ -11,9 +12,6 @@ import lombok.Data;
 public class LongField extends Field<Long> {
     protected TYPE type = TYPE.LONG;
 
-    public LongField(JSONObject fieldObject) {
-        super(fieldObject);
-    }
 
     public LongField() {
 
@@ -25,7 +23,7 @@ public class LongField extends Field<Long> {
     }
 
     @Override
-    public Long getValue(JSONObject value) {
+    public Long getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
             return (Long) o;
@@ -41,6 +39,6 @@ public class LongField extends Field<Long> {
 
     @Override
     protected void setDefault(String defaultValue) {
-        this.defaultValue = Long.valueOf(defaultValue);
+        this.defaultValue = StrUtil.isEmpty(defaultValue) ? 0L : Long.valueOf(defaultValue);
     }
 }

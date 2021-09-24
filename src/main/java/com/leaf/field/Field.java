@@ -56,14 +56,6 @@ public abstract class Field<T> implements Cloneable{
 
     }
 
-    public Field(JSONObject fieldObject) {
-        this.path = fieldObject.getString("path");
-        String defaultValue = fieldObject.getString("default");
-        this.setDefault(defaultValue);
-        String functionObject = fieldObject.getString("function");
-        this.function = FunctionParser.getFunction(functionObject, path);
-    }
-
     public void setFieldJSONObject(JSONObject fieldObject) {
         this.path = fieldObject.getString("path");
         String defaultValue = fieldObject.getString("default");
@@ -78,15 +70,19 @@ public abstract class Field<T> implements Cloneable{
      *
      * @return
      */
-    public T fieldExecute(JSONObject root, JSONObject value) {
+    public T fieldExecute(JSONObject root, JSONObject current) {
         try {
             T result;
             if (function != null) {
-                result = (T) function.execute(root, value);
+                result = (T) function.execute(root, current);
             } else if (StrUtil.isEmpty(path)) {
                 result = getDefault();
             } else {
-                result = getValue(value);
+                if (path.startsWith("^")) {
+                    result = getValue(root, path.substring(1, path.length()));
+                } else {
+                    result = getValue(current, path);
+                }
             }
             if (result == null) {
                 return getDefault();
@@ -135,7 +131,7 @@ public abstract class Field<T> implements Cloneable{
      */
     public abstract T getValue(String value);
 
-    public abstract T getValue(JSONObject value);
+    public abstract T getValue(JSONObject value, String path);
 
     protected abstract T getDefault();
 
