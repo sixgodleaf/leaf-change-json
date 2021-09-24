@@ -1,0 +1,12 @@
+{
+  "follower_count":{
+    "path": ".follower_count",
+    "type": "boolean",
+    "function":"larger(14)"
+  },
+  "arrayContain":{
+    "path": ".keywordInt",
+    "type": "boolean",
+    "function":"larger(3)"
+  }
+}

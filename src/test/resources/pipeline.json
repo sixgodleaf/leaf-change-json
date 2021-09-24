@@ -1,0 +1,7 @@
+{
+  "pipeline":{
+    "path": ".this_id",
+    "type": "string",
+    "function":"pipeline(replace(fb#RHINO#, urn:li:member:)|add(start, end))"
+  }
+}

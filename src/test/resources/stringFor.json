@@ -1,0 +1,13 @@
+{
+  "containFor": {
+    "path": ".keyword",
+    "type": "string",
+    "function": "for(contain(ycc))"
+  },
+  "largerFor": {
+    "path": ".keywordInt",
+    "default": "test",
+    "type": "string",
+    "function": "for(larger(4))"
+  }
+}
