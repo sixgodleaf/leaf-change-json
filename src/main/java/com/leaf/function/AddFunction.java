@@ -11,7 +11,7 @@ import lombok.Data;
  * @Date: 2021/9/18 17:21
  */
 @Data
-public class addFunction extends Function {
+public class AddFunction extends Function {
     private Value<String> startValue;
     private Value<String> endValue;
 

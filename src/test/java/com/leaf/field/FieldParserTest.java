@@ -65,5 +65,7 @@ public class FieldParserTest {
         test("/array.json");
         test("/object.json");
         test("/arrayObject.json");
+        test("/stringReplace.json");
+        test("/stringAdd.json");
     }
 }
