@@ -44,13 +44,14 @@ public class FieldParserTest {
         System.out.println(jsonObject);
     }
 
-    public void test(String path) {
+    public JSONObject test(String path) {
         jslt = BaseTest.getFileStr(path);
         DataEntity dataEntity = new DataEntity();
         dataEntity.setJslt(jslt);
         dataEntity.setJSONString(data);
         JSONObject jsonObject = dataEntity.changeJSONObject();
         System.out.println(jsonObject);
+        return jsonObject;
     }
 
     @Test

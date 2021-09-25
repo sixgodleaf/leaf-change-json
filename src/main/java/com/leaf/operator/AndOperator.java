@@ -1,10 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.Value;
-import com.leaf.function.Function;
-import com.leaf.function.FunctionParser;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.leaf.function.Value;
 
 import java.util.LinkedList;
 import java.util.List;

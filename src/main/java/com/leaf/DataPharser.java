@@ -1,29 +1,26 @@
-package com.leaf.field;
+package com.leaf;
 
 import com.alibaba.fastjson.JSONObject;
-import lombok.Data;
+import com.leaf.field.Field;
+import com.leaf.field.FieldParser;
+import com.leaf.field.TYPE;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- *
- *
- * @Author: yechengcheng
- * @Date: 2021/9/18 11:35
+ * @created by ycc
+ * @since 2021-09-25
  */
-@Data
-public class DataEntity {
+public class DataPharser {
     public Map<String, Field> fieldMap = new HashMap<>();
-    private JSONObject jsonObject;
-    private String JSONString;
 
 
-    public void setJSONString(String jsonString) {
-        this.JSONString = jsonString;
-        jsonObject = JSONObject.parseObject(jsonString);
+    public DataPharser(String jslt) {
+        fieldMap = FieldParser.parse(JSONObject.parseObject(jslt));
     }
+
+
     public void setJslt(String jslt) {
         fieldMap = FieldParser.parse(JSONObject.parseObject(jslt));
     }
@@ -32,7 +29,7 @@ public class DataEntity {
      * 生成Map
      * @return
      */
-    public Map<String, Object> changeMap() {
+    public Map<String, Object> changeMap(JSONObject jsonObject) {
         Map<String, Object> results = new HashMap<>();
         for (String key : fieldMap.keySet()) {
             Field field = fieldMap.get(key);
@@ -46,14 +43,11 @@ public class DataEntity {
         return results;
     }
 
-    public <T> T get(String key) {
-       return (T) fieldMap.get(key).fieldExecute(jsonObject, jsonObject);
-    }
     /**
      * 生成JSONObject
      * @return
      */
-    public JSONObject changeJSONObject() {
+    public JSONObject changeJSONObject(JSONObject jsonObject) {
         Map<String, Object> results = new HashMap<>();
         for (String key : fieldMap.keySet()) {
             results.put(key, fieldMap.get(key).fieldExecute(jsonObject, jsonObject));
@@ -61,14 +55,6 @@ public class DataEntity {
         return new JSONObject(results);
     }
 
-
-
-    public static void main(String[] args) {
-
-        DataEntity dataEntity = new DataEntity();
-        List<Map<String,Object>> integer = dataEntity.get("abc");
-
-    }
 
     /**
      * 增加一种配置的类型，支持配置中使用
@@ -89,7 +75,7 @@ public class DataEntity {
     }
 
     public void addField(String keyword, Field field) {
-
+        fieldMap.put(keyword, field);
     }
 
 }
