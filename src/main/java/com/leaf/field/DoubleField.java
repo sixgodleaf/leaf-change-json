@@ -14,8 +14,12 @@ public class DoubleField extends Field<Double> {
 
     }
 
-
     @Override
+    public Double getValue(Object value) {
+        return getValue(value.toString());
+    }
+
+
     public Double getValue(String value) {
         return Double.valueOf(value);
     }

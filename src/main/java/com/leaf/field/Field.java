@@ -74,7 +74,7 @@ public abstract class Field<T> implements Cloneable {
         try {
             T result;
             if (function != null) {
-                result = function.execute(root, current);
+                result = getValue(function.execute(root, current));
             } else if (StrUtil.isEmpty(path)) {
                 result = getDefault();
             } else {
@@ -129,7 +129,9 @@ public abstract class Field<T> implements Cloneable {
      * @param value
      * @return
      */
-    public abstract T getValue(String value);
+    public abstract T getValue(Object value);
+
+//    public abstract T getValue(String value);
 
     public abstract T getValue(JSONObject value, String path);
 

@@ -43,12 +43,16 @@ public class DateField extends Field<Long> {
         });
     }
 
+    @Override
+    public Long getValue(Object value) {
+        return null;
+    }
+
     public void setParam() {
 
     }
 
 
-    @Override
     public Long getValue(String value) {
         return Long.valueOf(value);
     }

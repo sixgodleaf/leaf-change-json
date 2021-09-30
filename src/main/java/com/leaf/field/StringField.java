@@ -14,8 +14,12 @@ public class StringField extends Field<String> {
     }
 
     @Override
+    public String getValue(Object value) {
+        return value.toString();
+    }
+
     public String getValue(String value) {
-        return null;
+        return value;
     }
 
     @Override

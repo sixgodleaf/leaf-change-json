@@ -2,10 +2,16 @@ package com.leaf;
 
 import com.alibaba.fastjson.JSONPath;
 import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.Filter;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.jayway.jsonpath.Criteria.where;
+import static com.jayway.jsonpath.Filter.filter;
+import static com.jayway.jsonpath.JsonPath.parse;
 
 /**
  * @created by ycc
@@ -56,6 +62,12 @@ public class JSONPathTest {
 
         String author0 = JsonPath.read(document, "$.store.book[0].author");
         String author1 = JsonPath.read(document, "$.store.book[1].author");
+        Filter cheapFictionFilter = filter(
+                where("category").is("fiction").and("price").lte(10)
+        );
+
+        List<Map<String, Object>> books = JsonPath.parse(json).read("$.store.book[?]", cheapFictionFilter);
+        System.out.println(books);
     }
     @Test
     public void test() {

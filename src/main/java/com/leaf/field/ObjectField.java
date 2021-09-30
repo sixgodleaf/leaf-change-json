@@ -17,7 +17,6 @@ public class ObjectField extends Field<Map<String, Object>> {
 
     }
 
-    @Override
     public Map<String, Object> getValue(String value) {
         return new Gson().fromJson(value, Map.class);
     }
@@ -38,6 +37,11 @@ public class ObjectField extends Field<Map<String, Object>> {
         super.setFieldJSONObject(fieldObject);
         Map<String, Field> interDataTypeMap = FieldParser.parse(fieldObject.getJSONObject("interFields"));
         this.setInterFields(interDataTypeMap);
+    }
+
+    @Override
+    public Map<String, Object> getValue(Object value) {
+        return getValue(value.toString());
     }
 
 

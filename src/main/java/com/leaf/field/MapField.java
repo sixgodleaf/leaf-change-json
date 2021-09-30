@@ -22,8 +22,12 @@ public class MapField extends Field<Map<String,Object>> {
 
     }
 
-
     @Override
+    public Map<String, Object> getValue(Object value) {
+        return getValue(value.toString());
+    }
+
+
     public Map<String, Object> getValue(String value) {
         return new Gson().fromJson(value, Map.class);
     }

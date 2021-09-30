@@ -19,8 +19,12 @@ public class BooleanField extends Field<Boolean> {
 
     }
 
-
     @Override
+    public Boolean getValue(Object value) {
+        return getValue(value.toString());
+    }
+
+
     public Boolean getValue(String value) {
         return Boolean.valueOf(value);
     }

@@ -17,6 +17,10 @@ public class ArrayField extends Field<List<Object>> {
     }
 
     @Override
+    public List<Object> getValue(Object value) {
+        return getValue(value.toString());
+    }
+
     public List getValue(String value) {
         return new Gson().fromJson(value, List.class);
     }
