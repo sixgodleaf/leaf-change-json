@@ -63,39 +63,6 @@ public class FieldParser {
         return dataTypeMap;
     }
 
-//    private static Field getField(String fieldName, JSONObject fieldObject) {
-//        String type = fieldObject.getString("type");
-//        Field field = null;
-//        if (type.equalsIgnoreCase("int")) {
-//            field = new IntegerField(fieldObject);
-//        } else if (type.equalsIgnoreCase("array")) {
-//            field = new ArrayField(fieldObject);
-//        } else if (type.equalsIgnoreCase("arrayobject")) {
-//            field = new ArrayObjectField(fieldObject);
-//        } else if (type.equalsIgnoreCase("boolean")) {
-//            field = new BooleanField(fieldObject);
-//        } else if (type.equalsIgnoreCase("date")) {
-//            field = new DateField(fieldObject);
-//        } else if (type.equalsIgnoreCase("double")) {
-//            field = new DoubleField(fieldObject);
-//        } else if (type.equalsIgnoreCase("float")) {
-//            field = new FloatField(fieldObject);
-//        } else if (type.equalsIgnoreCase("short")) {
-//            field = new ShortField(fieldObject);
-//        } else if (type.equalsIgnoreCase("long")) {
-//            field = new LongField(fieldObject);
-//        } else if (type.equalsIgnoreCase("object")) {
-//            field = new ObjectField(fieldObject);
-//        } else if (type.equalsIgnoreCase("string")) {
-//            field = new StringField(fieldObject);
-//        } else if (type.equalsIgnoreCase("map")) {
-//            field = new MapField(fieldObject);
-//        }
-//        field.setFieldName(fieldName);
-//        field.setFieldJSONObject(fieldObject);
-//        return field;
-//    }
-
     public static void addField(String fieldName, Field field) {
         fieldMap.put(fieldName, field);
     }
