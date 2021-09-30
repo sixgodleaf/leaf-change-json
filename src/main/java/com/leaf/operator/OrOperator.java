@@ -1,29 +1,26 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.Value;
-import com.leaf.function.Function;
-import com.leaf.function.FunctionParser;
+import com.leaf.function.Value;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * or()
+ * and(contain(fb#RHINO#),contain(link))
  * @created by ycc
  * @since 2021-09-20
  */
 public class OrOperator extends Operator {
-    private List<Function> functions = new LinkedList<>();
-    private List<Value<Boolean>> values = new LinkedList<>();
+    private List<Value> values = new LinkedList<>();
 
 
     @Override
     public void setParam(String param) {
-        String[] arrays = param.split("||");
+        String[] arrays = param.split(",");
         for (int i = 0; i < arrays.length; i++) {
             String funStr = arrays[i];
-            values.add(new Value<>(funStr, this.path));
+            values.add(new Value(funStr, this.path));
         }
     }
 

@@ -1,0 +1,12 @@
+{
+  "string":{
+    "path": ".this_id",
+    "type": "string",
+    "function":"contain(urn:li:member:)"
+  },
+  "arrayContain":{
+    "path": ".keywordInt",
+    "type": "string",
+    "function":"contain(3)"
+  }
+}

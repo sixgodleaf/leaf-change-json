@@ -24,7 +24,7 @@ public class IntegerField extends Field<Integer> {
     public Integer getValue(JSONObject value, String path) {
         Object o = JSONPath.read(value.toJSONString(), path);
         try {
-            return (Integer) o;
+            return getValue(o.toString());
         } catch (ClassCastException e) {
             return getValue(o.toString());
         }

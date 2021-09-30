@@ -44,17 +44,23 @@ public class FieldParserTest {
         System.out.println(jsonObject);
     }
 
-    public void test(String path) {
+    public JSONObject test(String path) {
         jslt = BaseTest.getFileStr(path);
         DataEntity dataEntity = new DataEntity();
         dataEntity.setJslt(jslt);
         dataEntity.setJSONString(data);
         JSONObject jsonObject = dataEntity.changeJSONObject();
         System.out.println(jsonObject);
+        return jsonObject;
     }
 
     @Test
     public void integerTest() {
+        test("/stringOr.json");
+        test("/switch.json");
+        test("/stringAnd.json");
+        test("/stringFor.json");
+        test("/pipeline.json");
         test("/integer.json");
         test("/string.json");
         test("/boolean.json");
@@ -67,5 +73,7 @@ public class FieldParserTest {
         test("/arrayObject.json");
         test("/stringReplace.json");
         test("/stringAdd.json");
+        test("/contain.json");
+        test("/larger.json");
     }
 }

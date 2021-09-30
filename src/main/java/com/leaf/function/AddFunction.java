@@ -1,7 +1,6 @@
 package com.leaf.function;
 
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.Value;
 import lombok.Data;
 
 /**
@@ -12,8 +11,8 @@ import lombok.Data;
  */
 @Data
 public class AddFunction extends Function {
-    private Value<String> startValue;
-    private Value<String> endValue;
+    private Value startValue;
+    private Value endValue;
 
     @Override
     public void setParam(String param) {

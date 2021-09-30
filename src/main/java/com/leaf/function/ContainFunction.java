@@ -2,7 +2,6 @@ package com.leaf.function;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.Value;
 
 /**
  * contain(fb#RHINO#)
@@ -12,13 +11,11 @@ import com.leaf.Value;
  * @since 2021-09-20
  */
 public class ContainFunction extends Function {
-//    private String value;
-    private Value<String> value;
+    private Value value;
 
     @Override
     public void setParam(String param) {
-        this.value = new Value<>(param, this.path);
-
+        this.value = new Value(param, this.path);
     }
 
     @Override

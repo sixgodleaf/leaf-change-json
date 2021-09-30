@@ -1,0 +1,7 @@
+{
+  "switch":{
+    "path": ".this_id",
+    "type": "integer",
+    "function":"switch(contain(urn:li)->3, contain(link)->6)"
+  }
+}

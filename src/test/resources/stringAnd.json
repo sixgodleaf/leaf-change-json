@@ -1,0 +1,13 @@
+{
+  "andYes": {
+    "path": ".this_id",
+    "type": "string",
+    "function": "and(contain(urn),contain(:li:member:))"
+  },
+  "andNo": {
+    "path": ".this_id",
+    "default": "test",
+    "type": "string",
+    "function": "and(contain(urn),contain(fb#RHINO))"
+  }
+}

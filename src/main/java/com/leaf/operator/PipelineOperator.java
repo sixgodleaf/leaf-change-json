@@ -1,9 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.Value;
-import com.leaf.function.Function;
-import com.leaf.function.FunctionParser;
+import com.leaf.function.Value;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.List;
  * @since 2021-09-20
  */
 public class PipelineOperator extends Operator {
-  private List<Function> functions = new LinkedList<>();
   private List<Value> values = new LinkedList<>();
     @Override
     public void setParam(String param) {

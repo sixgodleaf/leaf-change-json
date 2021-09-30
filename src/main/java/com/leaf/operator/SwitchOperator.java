@@ -1,9 +1,7 @@
 package com.leaf.operator;
 
 import com.alibaba.fastjson.JSONObject;
-import com.leaf.Value;
-import com.leaf.function.Function;
-import com.leaf.function.FunctionParser;
+import com.leaf.function.Value;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +13,7 @@ import java.util.Map;
  * @since 2021-09-20
  */
 public class SwitchOperator extends Operator {
-
-    private Map<Function, Object> objectMap = new HashMap<>();
-    private Map<Value<Boolean>, Value> valueMap = new HashMap<>();
+    private Map<Value, Value> valueMap = new HashMap<>();
 
     @Override
     public void setParam(String param) {
@@ -37,7 +33,7 @@ public class SwitchOperator extends Operator {
 
     @Override
     public <T> T execute(JSONObject root, JSONObject jsonObject) {
-        for (Value<Boolean> value : valueMap.keySet()) {
+        for (Value value : valueMap.keySet()) {
             Boolean b = value.execute(root, jsonObject);
             if (b) {
                 return (T) valueMap.get(value).execute(root, jsonObject);

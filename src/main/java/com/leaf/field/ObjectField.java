@@ -1,8 +1,8 @@
 package com.leaf.field;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class ObjectField extends Field<Map<String, Object>> {
 
     @Override
     public Map<String, Object> getValue(String value) {
-        return null;
+        return new Gson().fromJson(value, Map.class);
     }
 
     @Override

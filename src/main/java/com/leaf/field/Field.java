@@ -40,11 +40,11 @@ import java.util.Map;
  */
 @Slf4j
 @Data
-public abstract class Field<T> implements Cloneable{
+public abstract class Field<T> implements Cloneable {
     public String path;
     public String rootPath;
     public String fieldName;
-    public TYPE type;
+    public transient TYPE type;
     public T defaultValue;
     public Function function; // 用于处理该字段
     public JSONObject fieldJSONObject;
@@ -74,7 +74,7 @@ public abstract class Field<T> implements Cloneable{
         try {
             T result;
             if (function != null) {
-                result = (T) function.execute(root, current);
+                result = function.execute(root, current);
             } else if (StrUtil.isEmpty(path)) {
                 result = getDefault();
             } else {
@@ -90,7 +90,7 @@ public abstract class Field<T> implements Cloneable{
             return result;
         } catch (Exception e) {
             log.error("对接日志监控，加个函数处理，比如将日志上传到elasticsearch做监控");
-            log.error("fieldname : [{}], function : [{}]",this.getFieldName(), this.getPath(), this.getFieldJSONObject());
+            log.error("fieldname : [{}], function : [{}]", this.getFieldName(), this.getPath(), this.getFieldJSONObject());
             log.error(e.getMessage(), e);
         }
         return null;
@@ -113,7 +113,6 @@ public abstract class Field<T> implements Cloneable{
     }
 
 
-
     @Override
     public Field clone() {
         try {
@@ -123,6 +122,7 @@ public abstract class Field<T> implements Cloneable{
         }
         return null;
     }
+
     /**
      * 对改字段的处理方式
      *
