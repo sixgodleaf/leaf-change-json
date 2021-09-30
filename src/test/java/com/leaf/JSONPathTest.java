@@ -1,15 +1,74 @@
 package com.leaf;
 
 import com.alibaba.fastjson.JSONPath;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.Filter;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.jayway.jsonpath.Criteria.where;
+import static com.jayway.jsonpath.Filter.filter;
+import static com.jayway.jsonpath.JsonPath.parse;
 
 /**
  * @created by ycc
  * @since 2021-09-20
  */
 public class JSONPathTest {
+
+    @Test
+    public void pathTest() {
+        String json = "{\n" +
+                "    \"store\": {\n" +
+                "        \"book\": [\n" +
+                "            {\n" +
+                "                \"category\": \"reference\",\n" +
+                "                \"author\": \"Nigel Rees\",\n" +
+                "                \"title\": \"Sayings of the Century\",\n" +
+                "                \"price\": 8.95\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"category\": \"fiction\",\n" +
+                "                \"author\": \"Evelyn Waugh\",\n" +
+                "                \"title\": \"Sword of Honour\",\n" +
+                "                \"price\": 12.99\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"category\": \"fiction\",\n" +
+                "                \"author\": \"Herman Melville\",\n" +
+                "                \"title\": \"Moby Dick\",\n" +
+                "                \"isbn\": \"0-553-21311-3\",\n" +
+                "                \"price\": 8.99\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"category\": \"fiction\",\n" +
+                "                \"author\": \"J. R. R. Tolkien\",\n" +
+                "                \"title\": \"The Lord of the Rings\",\n" +
+                "                \"isbn\": \"0-395-19395-8\",\n" +
+                "                \"price\": 22.99\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        \"bicycle\": {\n" +
+                "            \"color\": \"red\",\n" +
+                "            \"price\": 19.95\n" +
+                "        }\n" +
+                "    },\n" +
+                "    \"expensive\": 10\n" +
+                "}";
+        Object document = Configuration.defaultConfiguration().jsonProvider().parse(json);
+
+        String author0 = JsonPath.read(document, "$.store.book[0].author");
+        String author1 = JsonPath.read(document, "$.store.book[1].author");
+        Filter cheapFictionFilter = filter(
+                where("category").is("fiction").and("price").lte(10)
+        );
+
+        List<Map<String, Object>> books = JsonPath.parse(json).read("$.store.book[?]", cheapFictionFilter);
+        System.out.println(books);
+    }
     @Test
     public void test() {
         String json = "{ \"store\": {\n" +

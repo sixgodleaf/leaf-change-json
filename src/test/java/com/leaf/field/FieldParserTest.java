@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 import com.leaf.BaseTest;
+import com.leaf.DataPharser;
 import com.leaf.function.ReplaceFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -52,6 +53,15 @@ public class FieldParserTest {
         JSONObject jsonObject = dataEntity.changeJSONObject();
         System.out.println(jsonObject);
         return jsonObject;
+    }
+
+    @Test
+    public void test() {
+        String jslt = "....";
+        String data = "....";
+        JSONObject jsonObject = JSONObject.parseObject(data);
+        DataPharser dataPharser = new DataPharser(jslt);
+        JSONObject results = dataPharser.changeJSONObject(jsonObject);
     }
 
     @Test

@@ -1,8 +1,10 @@
 package com.leaf.field;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +31,15 @@ public class ArrayObjectField extends Field<List<Map<String, Object>>> {
         this.setInterFields(interDataTypeMap);
     }
 
-
     @Override
+    public List<Map<String, Object>> getValue(Object value) {
+        return getValue(value.toString());
+    }
+
+
     public List<Map<String, Object>> getValue(String value) {
-        return null;
+
+        return new Gson().fromJson(value, List.class);
     }
 
     @Override

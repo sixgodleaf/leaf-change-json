@@ -18,6 +18,10 @@ public class LongField extends Field<Long> {
     }
 
     @Override
+    public Long getValue(Object value) {
+        return getValue(value.toString());
+    }
+
     public Long getValue(String value) {
         return Long.valueOf(value);
     }

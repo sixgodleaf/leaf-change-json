@@ -15,6 +15,10 @@ public class FloatField extends Field<Float> {
     }
 
     @Override
+    public Float getValue(Object value) {
+        return getValue(value.toString());
+    }
+
     public Float getValue(String value) {
         return Float.valueOf(value);
     }

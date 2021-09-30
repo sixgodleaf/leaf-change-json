@@ -13,9 +13,12 @@ public class IntegerField extends Field<Integer> {
 
     }
 
-
-
     @Override
+    public Integer getValue(Object value) {
+        return getValue(value.toString());
+    }
+
+
     public Integer getValue(String value) {
         return Integer.valueOf(value);
     }

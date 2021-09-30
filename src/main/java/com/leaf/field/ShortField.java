@@ -15,6 +15,10 @@ public class ShortField extends Field<Short> {
     }
 
     @Override
+    public Short getValue(Object value) {
+        return getValue(value.toString());
+    }
+
     public Short getValue(String value) {
         return Short.valueOf(value);
     }
