@@ -1,13 +1,13 @@
 {
   "orYes": {
     "path": ".this_id",
-    "type": "string",
+    "type": "boolean",
     "function": "or(contain(urn),contain(:li:member:))"
   },
   "orNo": {
     "path": ".this_id",
     "default": "test",
-    "type": "string",
+    "type": "boolean",
     "function": "or(contain(urn),contain(fb#RHINO))"
   }
 }
