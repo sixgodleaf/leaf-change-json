@@ -6,7 +6,6 @@
   },
   "andNo": {
     "path": ".this_id",
-    "default": "test",
     "type": "boolean",
     "function": "and(contain(urn),contain(fb#RHINO))"
   }

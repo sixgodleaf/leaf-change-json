@@ -1,6 +1,7 @@
 {
   "long":{
-    "path": ".follower_count",
+    "path": ".follower_coun",
+    "default": 123,
     "type": "long"
   }
 }
