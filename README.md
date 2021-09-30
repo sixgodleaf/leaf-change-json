@@ -60,7 +60,7 @@
 * demo: switch(contain(fb#RHINO#)->3, contain(link)->6)
 ### demo
 
-```$xslt
+```
 
   @Test
     public void test() {
